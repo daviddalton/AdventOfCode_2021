@@ -10,7 +10,7 @@ There are some helper scripts to quickly execute redundant tasks that are common
 
 `. ./newDay.sh dX`
 
-- Executed from the root of the project (AdventOfCode_2021)
+- Execute from the root of the project (AdventOfCode_2021)
 - Replace X with day
 
 ### Next Part
