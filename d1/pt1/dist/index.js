@@ -20,6 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
+console.log('start');
 const rawData = fs.readFileSync('input.txt', 'utf8');
 const data = rawData.split('\n');
-console.log(data);
+console.log('yooo');
