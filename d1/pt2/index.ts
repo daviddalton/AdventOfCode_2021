@@ -6,14 +6,17 @@ const data: string[] = rawData.split('\n');
 let total = 0;
 let previousDepth = null;
 
-for (let depth of data) {
-    if (previousDepth != null) {
-        console.log("Previous: " + previousDepth + " ----- Current: " + depth)
-        if (+depth > +previousDepth) {
-            total++;
+for (let i =0; i < data.length; i++) {
+    if (data[i + 2] != null) {
+        let totalData = +data[i] + +data[i + 1] + +data[i + 2];
+        if (previousDepth != null) {
+            // console.log("Previous: " + previousDepth + " ----- Current: " + depth)
+            if (totalData > previousDepth) {
+                total++;
+            }
         }
+        previousDepth = totalData;
     }
-    previousDepth = depth;
 }
 
 console.log(total);
