@@ -22,4 +22,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const rawData = fs.readFileSync('input.txt', 'utf8');
 const data = rawData.split('\n');
-console.log(data);
+let total = 0;
+let previousDepth = null;
+for (let depth of data) {
+    if (previousDepth != null) {
+        console.log("Previous: " + previousDepth + " ----- Current: " + depth);
+        if (+depth > +previousDepth) {
+            total++;
+        }
+    }
+    previousDepth = depth;
+}
+console.log(total);
