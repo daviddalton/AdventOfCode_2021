@@ -22,4 +22,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const rawData = fs.readFileSync('input.txt', 'utf8');
 const data = rawData.split('\n');
-console.log(data);
+let horizontalPos = 0;
+let depth = 0;
+for (let d of data) {
+    let input = d.split(" ")[0];
+    let amount = +d.split(" ")[1];
+    if (input.toString() == "forward") {
+        horizontalPos += amount;
+    }
+    else if (input.toString() == "down") {
+        depth += amount;
+    }
+    else if (input.toString() == "up") {
+        depth -= amount;
+    }
+}
+console.log(horizontalPos * depth);
