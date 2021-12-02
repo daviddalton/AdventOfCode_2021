@@ -5,6 +5,7 @@ const data: string[] = rawData.split('\n');
 
 let horizontalPos = 0;
 let depth = 0;
+let aim = 0;
 
 for (let d of data) {
     let input = d.split(" ")[0];
@@ -12,10 +13,11 @@ for (let d of data) {
 
     if (input.toString() == "forward") {
         horizontalPos += amount;
+        depth += aim * amount;
     } else if (input.toString() == "down") {
-        depth += amount;
+        aim += amount;
     } else if (input.toString() == "up") {
-        depth -= amount;
+        aim -= amount;
     }
 }
 
