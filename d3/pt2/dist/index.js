@@ -22,30 +22,80 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const rawData = fs.readFileSync('input.txt', 'utf8');
 const data = rawData.split('\n');
-let gamma = '';
-let epsilon = '';
-for (let i = 0; i < data[0].length; i++) {
+let oxygenGenRating = '';
+let co2ScrubberRating = '';
+let oxygenArray = data.slice();
+let co2Array = data.slice();
+for (let i = 0; i < oxygenArray[0].length; i++) {
     let ones = 0;
     let zeros = 0;
-    for (let d of data) {
-        if (+d.charAt(i) == 1) {
+    for (let o of oxygenArray) {
+        if (+o.charAt(i) == 1) {
             ones++;
         }
         else {
             zeros++;
         }
     }
-    if (ones > zeros) {
-        gamma += '1';
-        epsilon += '0';
+    //oxygen
+    if (ones == 0 || zeros == 0) {
+        oxygenGenRating = oxygenArray[0];
+        continue;
+    }
+    if (ones >= zeros) {
+        for (let j = 0; j < oxygenArray.length; j++) {
+            if (oxygenArray[j].charAt(i) == '0') {
+                oxygenArray.splice(j, 1);
+            }
+        }
     }
     else {
-        gamma += '0';
-        epsilon += '1';
+        for (let j = 0; j < oxygenArray.length; j++) {
+            if (oxygenArray[j].charAt(i) == '1') {
+                oxygenArray.splice(j, 1);
+            }
+        }
     }
 }
-console.log(gamma);
-console.log(epsilon);
-let gammaDecimal = parseInt(gamma, 2);
-let epsilonDecimal = parseInt(epsilon, 2);
-console.log(gammaDecimal * epsilonDecimal);
+let count = co2Array[0].length;
+for (let i = 0; i < count; i++) {
+    let ones = 0;
+    let zeros = 0;
+    for (let o of co2Array) {
+        if (+o.charAt(i) == 1) {
+            ones++;
+        }
+        else {
+            zeros++;
+        }
+    }
+    //co2
+    if (ones == 0 || zeros == 0) {
+        co2ScrubberRating = co2Array[0];
+        continue;
+    }
+    if (ones < zeros) {
+        console.log("ones");
+        for (let j = 0; j < co2Array.length; j++) {
+            if (co2Array[j].charAt(i) == '0') {
+                co2Array.splice(j, 1);
+            }
+        }
+    }
+    else {
+        console.log("zeros");
+        for (let j = 0; j < co2Array.length; j++) {
+            if (co2Array[j].charAt(i) == '1') {
+                co2Array.splice(j, 1);
+            }
+        }
+    }
+    console.log(co2Array);
+}
+console.log(oxygenArray);
+console.log(oxygenGenRating);
+console.log(co2Array);
+console.log(co2ScrubberRating);
+let oxygenDecimal = parseInt(oxygenGenRating, 2);
+let co2Decimal = parseInt(co2ScrubberRating, 2);
+console.log(oxygenDecimal * co2Decimal);
